@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sai Kalyan Daddanala · Strategy · Operations · Program Management</title>
+  <meta name="description" content="IIM Kozhikode MBA with close to 4 years across Program Management, Strategy & Operations, and Investment Compliance." />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+
+  <style>
+    :root {
+      --bg-light:      #F8FAFC; 
+      --bg-card:       #FFFFFF; 
+      --bg-tint:       #F1F5F9; 
+      --bcg-emerald:   #1E3A8A; 
+      --bcg-neon:      #3B82F6; 
+      --text-primary:  #0F172A; 
+      --text-body:     #334155; 
+      --muted:         #64748B; 
+      --border-accent: rgba(30, 58, 138, 0.15);
+      --border-thin:   rgba(15, 23, 42, 0.06);
+      --radius:        4px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    
+    body {
+      background: var(--bg-light);
+      color: var(--text-body);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAVIGATION BAR ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
+      height: 72px;
+      background: rgba(248, 250, 252, 0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-thin);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: 0.02em;
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--bcg-emerald); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--text-body);
+      text-decoration: none;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--bcg-neon); }
+
+    /* ─── HERO SECTION ─── */
+    #hero {
+      position: relative;
+      min-height: 95vh;
+      display: flex;
+      align-items: center;
+      padding: 8rem clamp(1.5rem, 6vw, 6rem) 5rem;
+      overflow: hidden;
+      background: #0F172A; 
+    }
+    #hero-video-bg {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
+    .hero-vignette {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.78) 40%, rgba(30, 41, 59, 0.65) 100%);
+      z-index: 2;
+    }
+    .hero-grid {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    #hero .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.2rem, 5.5vw, 5.2rem);
+      font-weight: 400;
+      line-height: 1.1;
+      color: #FFFFFF;
+      margin-bottom: 2rem;
+    }
+    #hero .hero-title em { font-style: italic; color: #60A5FA; }
+    #hero .hero-summary {
+      font-size: clamp(1.05rem, 1.3vw, 1.2rem);
+      color: #E2E8F0;
+      max-width: 650px;
+      margin-bottom: 3rem;
+      line-height: 1.65;
+    }
+    
+    /* Institutional Vector Logos */
+    #hero .hero-logos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3.5rem;
+      padding-top: 3rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      align-items: center;
+      justify-content: flex-start;
+    }
+    #hero .hero-logos img {
+      max-height: 50px; 
+      width: auto;
+      object-fit: contain;
+      filter: brightness(0) invert(1) drop-shadow(0 0 1px rgba(255,255,255,0.2));
+      opacity: 0.8;
+      transition: all 0.3s ease;
+   }
+#hero .hero-logos img[alt="Annova Solutions"] {
+  max-height: 90px !important;
+}
+    #hero .hero-logos img:hover {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+
+    /* Dynamic Shifting Coordinate Card Layout */
+    .hero-photo-block {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .location-card {
+      position: relative;
+      background: rgba(15, 23, 42, 0.5); /* Glassy darker tone */
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius);
+      padding: 4.5rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.2rem;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      text-align: center;
+      width: 100%;
+      max-width: 380px;
+    }
+    
+    /* Coordinate Grid */
+    .location-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      background-size: 30px 30px;
+      background-position: center center;
+      z-index: 0;
+    }
+
+    /* Faint Radar Sweep */
+    .location-card::after {
+      content: '';
+      position: absolute;
+      width: 150%;
+      height: 150%;
+      background: conic-gradient(from 0deg, transparent 60%, rgba(96, 165, 250, 0.08) 100%);
+      animation: radar-rotate 8s linear infinite;
+      z-index: 0;
+      top: -25%; left: -25%;
+      border-radius: 50%;
+    }
+
+    /* Implied Globe / Lat-Long Rings */
+    .globe-rings {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 240px; height: 240px;
+      border: 1px dashed rgba(96, 165, 250, 0.2);
+      border-radius: 50%;
+      z-index: 0;
+    }
+    .globe-rings::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 120px; height: 240px;
+      border: 1px solid rgba(96, 165, 250, 0.08);
+      border-radius: 50%;
+    }
+    .globe-rings::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 240px; height: 120px;
+      border: 1px solid rgba(96, 165, 250, 0.08);
+      border-radius: 50%;
+    }
+
+    @keyframes radar-rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .pin-container {
+      position: relative;
+      z-index: 2;
+      display: inline-block;
+      margin-bottom: 0.5rem;
+    }
+    
+    .location-card i.main-pin {
+      font-size: 3.5rem;
+      color: #60A5FA;
+      position: relative;
+      z-index: 2;
+      display: block;
+      filter: drop-shadow(0 0 12px rgba(96, 165, 250, 0.4));
+    }
+    
+    .pulse-ring {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 45px; height: 45px;
+      border: 2px solid rgba(96, 165, 250, 0.5);
+      border-radius: 50%;
+      animation: pin-pulse 2.5s ease-out infinite;
+      z-index: 1;
+    }
+    
+    @keyframes pin-pulse {
+      0% { transform: translate(-50%, -50%) scale(0.6); opacity: 1; }
+      100% { transform: translate(-50%, -50%) scale(2.5); opacity: 0; }
+    }
+    
+    .location-card h3 {
+      font-size: 1.8rem;
+      color: #FFFFFF;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      z-index: 2;
+      letter-spacing: 0.02em;
+    }
+    
+    .location-card p {
+      font-size: 0.85rem;
+      color: #94A3B8;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      z-index: 2;
+      font-weight: 700;
+    }
+
+    /* ─── TICKER ─── */
+    .ticker-wrap {
+      background: var(--bg-card);
+      border-top: 1px solid var(--border-thin);
+      border-bottom: 1px solid var(--border-thin);
+      overflow: hidden;
+      padding: 1rem 0;
+    }
+    .ticker-inner {
+      display: flex;
+      animation: ticker 40s linear infinite;
+      white-space: nowrap;
+    }
+    .ticker-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0 2.5rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-body);
+      font-weight: 500;
+    }
+    .ticker-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--bcg-neon);
+      flex-shrink: 0;
+    }
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ─── SECTION ARCHITECTURE ─── */
+    section { padding: clamp(5rem, 8vw, 7.5rem) clamp(1.5rem, 6vw, 6rem); position: relative; }
+    .section-lbl {
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--bcg-neon);
+      margin-bottom: 1.2rem;
+      font-weight: 700;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 4vw, 3.8rem);
+      font-weight: 400;
+      color: var(--text-primary);
+      margin-bottom: 4.5rem;
+    }
+    .section-title em { font-style: italic; color: var(--bcg-emerald); }
+
+    /* ─── EXPERTISE MATRIX ─── */
+    #expertise { background: var(--bg-tint); }
+    .matrix-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+    .matrix-card {
+      background: var(--bg-card);
+      padding: 3rem 2.5rem;
+      border: 1px solid var(--border-thin);
+      border-radius: var(--radius);
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.01);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+    .matrix-card:hover { transform: translateY(-4px); border-color: var(--bcg-neon); }
+    .matrix-num { font-size: 2.2rem; color: var(--bcg-emerald); font-weight: 700; margin-bottom: 1rem; display: block; line-height: 1; opacity: 0.3; }
+    .matrix-heading { font-size: 1.15rem; color: var(--text-primary); font-weight: 700; margin-bottom: 1rem; }
+    .matrix-desc { font-size: 0.9rem; color: var(--text-body); margin-bottom: 1.5rem; line-height: 1.65; }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .tag { font-size: 0.7rem; padding: 0.25rem 0.6rem; background: var(--bg-light); border: 1px solid var(--border-thin); color: var(--text-body); border-radius: 3px; font-weight: 500; text-transform: uppercase; }
+
+    /* ─── IMPACT NUMBERS ─── */
+    #impact { background: var(--bg-card); }
+    .impact-quote { text-align: center; max-width: 850px; margin: 0 auto 5.5rem auto; }
+    .impact-quote blockquote { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 2.6rem); font-style: italic; color: var(--text-primary); line-height: 1.4; }
+    .impact-quote cite { display: block; font-size: 0.85rem; color: var(--bcg-neon); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 1.5rem; font-style: normal; font-weight: 600; }
+    
+    .impact-grid { 
+      display: grid; 
+      grid-template-columns: repeat(3, 1fr); 
+      gap: 1.5rem; 
+    }
+    .impact-card { 
+      background: var(--bg-light); 
+      padding: 3rem 2.5rem; 
+      text-align: center; 
+      border: 1px solid var(--border-thin);
+      border-radius: var(--radius);
+      transition: background-color 0.2s; 
+    }
+    .impact-card:hover { background: var(--bg-tint); }
+    .impact-card i { font-size: 3.2rem; color: var(--bcg-emerald); margin-bottom: 1.25rem; display: block; }
+    .impact-num { font-size: 3.2rem; font-weight: 700; color: var(--text-primary); line-height: 1; margin-bottom: 1rem; display: block; }
+    .impact-label { font-size: 0.95rem; color: var(--text-body); font-weight: 500; }
+
+    /* ─── TIMELINE JOURNEY ─── */
+    #journey { background: var(--bg-tint); }
+    .timeline-wrapper { position: relative; max-width: 950px; margin: 0 auto; }
+    .timeline-wrapper::before { content: ''; position: absolute; left: 12px; top: 8px; bottom: 8px; width: 1px; background: rgba(30, 58, 138, 0.2); }
+    .timeline-node { position: relative; padding-left: 3.5rem; margin-bottom: 5.5rem; }
+    .timeline-node:last-child { margin-bottom: 0; }
+    .timeline-node::before { content: ''; position: absolute; left: 7px; top: 10px; width: 11px; height: 11px; border-radius: 50%; background: var(--bcg-emerald); z-index: 2; }
+    .node-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.4rem; flex-wrap: wrap; gap: 0.5rem; }
+    .node-org { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--text-primary); font-weight: 500; }
+    .node-date { font-size: 0.92rem; color: var(--bcg-neon); font-weight: 700; letter-spacing: 0.02em; }
+    .node-role { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 1.5rem; font-weight: 700; }
+    .node-intro { font-size: 0.95rem; margin-bottom: 1.25rem; color: var(--text-primary); font-style: italic; }
+    
+    .node-sub-group { margin-bottom: 1.75rem; }
+    .node-sub-group:last-child { margin-bottom: 0; }
+    .node-sub-title { font-weight: 700; color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.6rem; letter-spacing: 0.02em; }
+    
+    .node-bullet { position: relative; padding-left: 1.5rem; margin-bottom: 0.8rem; font-size: 0.95rem; color: var(--text-body); }
+    .node-bullet::before { content: '▪'; position: absolute; left: 0; color: var(--bcg-neon); }
+
+    /* ─── WHAT I SEEK ─── */
+    #seek { background: var(--bg-card); }
+    .seek-intro { max-width: 700px; font-size: 1.1rem; color: var(--text-body); line-height: 1.75; margin-bottom: 4rem; }
+    .seek-grid { 
+      display: grid; 
+      grid-template-columns: repeat(3, 1fr); 
+      gap: 1.5rem; 
+    }
+    .seek-card { 
+      background: var(--bg-light); 
+      padding: 2.5rem 2rem; 
+      border: 1px solid var(--border-thin);
+      border-radius: var(--radius);
+      transition: border-color 0.2s, background-color 0.2s;
+    }
+    .seek-card:hover { border-color: var(--bcg-neon); background: var(--bg-tint); }
+    .seek-icon { font-size: 1.6rem; color: var(--bcg-emerald); margin-bottom: 1.25rem; display: block; }
+    .seek-title { font-size: 1.05rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.6rem; }
+    .seek-desc { font-size: 0.88rem; color: var(--text-body); line-height: 1.6; }
+
+    /* ─── COMPETENCIES ─── */
+    #competencies { background: var(--bg-tint); }
+    .bring-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .bring-text { font-size: 1.05rem; color: var(--text-body); line-height: 1.8; margin-bottom: 2.5rem; }
+    .bring-list { list-style: none; display: flex; flex-direction: column; gap: 1.5rem; }
+    .bring-list li { display: flex; gap: 1rem; align-items: flex-start; }
+    .bring-list li .li-num { font-size: 0.95rem; font-weight: 700; color: var(--bcg-neon); flex-shrink: 0; }
+    .bring-list li .li-text { font-size: 0.92rem; color: var(--text-body); line-height: 1.7; }
+    .bring-list li .li-text strong { color: var(--text-primary); font-weight: 700; }
+    
+    .skills-block { background: var(--bg-card); border: 1px solid var(--border-thin); padding: 3rem 2.5rem; border-radius: var(--radius); box-shadow: 0 4px 15px rgba(15, 23, 42, 0.01); }
+    .skills-group { margin-bottom: 2.2rem; }
+    .skills-group:last-child { margin-bottom: 0; }
+    .skills-group-label { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--bcg-emerald); margin-bottom: 1rem; font-weight: 700; }
+    .skills-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .skill-tag { font-size: 0.8rem; padding: 0.4rem 0.9rem; background: var(--bg-light); border: 1px solid var(--border-thin); border-radius: 3px; color: var(--text-primary); font-weight: 500; }
+
+    /* ─── EDUCATION ─── */
+    #education { background: var(--bg-card); }
+    .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .edu-card { background: var(--bg-light); padding: 3rem 2.5rem; border: 1px solid var(--border-thin); border-radius: var(--radius); }
+    .edu-year { font-size: 0.92rem; font-weight: 700; color: var(--bcg-neon); margin-bottom: 0.75rem; letter-spacing: 0.02em; }
+    .edu-degree { font-size: 1.15rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.4rem; font-family: 'Cormorant Garamond', serif; }
+    .edu-inst { font-size: 0.88rem; color: var(--muted); margin-bottom: 1.25rem; font-weight: 500; }
+    .edu-note { font-size: 0.88rem; color: var(--text-body); line-height: 1.6; font-style: italic; }
+
+    /* ─── CAROUSEL ─── */
+    #moments-carousel { background: var(--bg-tint); overflow: hidden; padding: 6rem 0; border-top: 1px solid var(--border-thin); border-bottom: 1px solid var(--border-thin); }
+    .carousel-label { text-align: center; font-size: 0.75rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--bcg-emerald); margin-bottom: 2.5rem; font-weight: 700; }
+    .carousel-marquee { display: flex; overflow: hidden; width: 100%; position: relative; }
+    .marquee-track { display: flex; gap: 1.5rem; animation: scroll-track 55s linear infinite; }
+    .marquee-track img {
+      width: 290px;
+      height: 380px;
+      object-fit: cover;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-thin);
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.02);
+    }
+    @keyframes scroll-track {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ─── CONTACT PANEL ─── */
+    #contact { background: var(--bg-card); }
+    .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .contact-intro { font-size: 1.05rem; color: var(--text-body); line-height: 1.8; margin-bottom: 3rem; }
+    .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-link { display: flex; align-items: center; gap: 1rem; color: var(--text-primary); text-decoration: none; font-size: 0.95rem; padding: 1.1rem 1.5rem; background: var(--bg-light); border: 1px solid var(--border-thin); border-radius: var(--radius); font-weight: 500; transition: all 0.2s; }
+    .contact-link:hover { border-color: var(--bcg-neon); background: var(--bg-tint); }
+    .contact-link i { color: var(--bcg-emerald); font-size: 1.25rem; }
+    
+    .open-to-box { background: var(--bg-light); border: 1px solid var(--border-thin); padding: 3rem 2.5rem; border-radius: var(--radius); }
+    .open-to-label { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--bcg-emerald); margin-bottom: 1.5rem; font-weight: 700; }
+    .open-to-item { display: flex; align-items: center; gap: 0.75rem; font-size: 0.92rem; color: var(--text-body); padding: 0.75rem 0; border-bottom: 1px solid var(--border-thin); }
+    .open-to-item:last-child { border-bottom: none; }
+    .open-to-item i { color: var(--bcg-neon); font-size: 1.1rem; }
+
+    footer { 
+      background: var(--bg-light); 
+      padding: 2.5rem; 
+      text-align: center; 
+      border-top: 1px solid var(--border-thin); 
+      font-size: 0.85rem; 
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .reveal { opacity: 0; transform: translateY(20px); transition: all 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 968px) {
+      .hero-grid, .impact-grid, .seek-grid, .bring-layout, .contact-layout { grid-template-columns: 1fr !important; text-align: center; gap: 2.5rem; }
+      .hero-logos { justify-content: center; gap: 2rem !important; }
+      .nav-links { display: none; }
+      .bring-list li { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="#hero">Sai Kalyan <span>Daddanala</span></a>
+    <ul class="nav-links">
+      <li><a href="#expertise">Expertise</a></li>
+      <li><a href="#journey">Journey</a></li>
+      <li><a href="#seek">Preferred Opportunities</a></li>
+      <li><a href="#competencies">Competencies</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section id="hero">
+    <video autoplay muted loop playsinline id="hero-video-bg">
+      <source src="Hailuo_Video_Transform this Paris nightscap_520431913214873605.mp4" type="video/mp4">
+    </video>
+    <div class="hero-vignette"></div>
+
+    <div class="hero-grid">
+      <div class="hero-text-block">
+        <h1 class="hero-title reveal">Sai Kalyan <br><em>Daddanala</em></h1>
+        <p class="hero-summary reveal">
+          MBA from IIM Kozhikode with close to 4 years across Program Management, Strategy &amp; Operations, and Investment Compliance. Currently exploring opportunities in Strategy &amp; Operations, Program Management / PMO and Compliance functions.
+        </p>
+        
+        <div class="hero-logos reveal">
+          <img src="logo2.png" alt="IIM Kozhikode" title="IIM Kozhikode">
+          <img src="IE_Business_School_logo.png" alt="IE Business School" title="IE Business School">
+	 <div class="annova-wrapper">
+    <img src="AnnovaL.png" alt="Annova Solutions" title="Annova Solutions">
+</div>
+          <img src="208-2087230_landmark-group-landmark-group-logo-png.png" alt="Landmark Group" title="Landmark Group">
+	  <img src="FT_Logo.png" alt="Franklin Templeton" title="Franklin Templeton">
+	  
+        </div>
+      </div>
+      
+      <div class="hero-photo-block reveal">
+        <div class="location-card">
+          <div class="globe-rings"></div>
+          <div class="pin-container">
+            <i class="ti ti-map-pin-filled main-pin"></i>
+            <div class="pulse-ring"></div>
+          </div>
+          <h3>Hyderabad, IN</h3>
+          <p>Open to Relocation</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ticker-wrap" aria-hidden="true">
+    <div class="ticker-inner">
+      <span class="ticker-item"><span class="ticker-dot"></span>IIM Kozhikode MBA</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>IE Business School, Madrid</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Annova Solutions · Program Manager</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Franklin Templeton · Investment Compliance</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>PMO · Strategy · Operations · Product</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>AI-enabled Process Transformation</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>$80B+ AUM · Pre &amp; Post Trade Compliance</span>
+      
+      <span class="ticker-item"><span class="ticker-dot"></span>IIM Kozhikode MBA</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>IE Business School, Madrid</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Annova Solutions · Program Manager</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Franklin Templeton · Investment Compliance</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>PMO · Strategy · Operations · Product</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>AI-enabled Process Transformation</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>$80B+ AUM · Pre &amp; Post Trade Compliance</span>
+    </div>
+  </div>
+
+  <section id="expertise">
+    <p class="section-lbl">Capabilities</p>
+    <h2 class="section-title">Functional <em>Expertise</em></h2>
+    <div class="matrix-grid">
+      <div class="matrix-card reveal">
+        <span class="matrix-num">01</span>
+        <h3 class="matrix-heading">Program &amp; Project Management</h3>
+        <p class="matrix-desc">Building PMOs from 0 ➔ 1, running cross-functional delivery, owning roadmaps end-to-end from sprint planning and stakeholder alignment to go-live and retrospectives.</p>
+        <div class="tag-row">
+          <span class="tag">PMO Build</span><span class="tag">Agile / Scrum</span><span class="tag">UAT</span>
+        </div>
+      </div>
+      <div class="matrix-card reveal">
+        <span class="matrix-num">02</span>
+        <h3 class="matrix-heading">Strategy &amp; Operations</h3>
+        <p class="matrix-desc">Designing operating models, identifying process gaps, and executing transformation initiatives with a focus on measurable productivity, cost, and quality outcomes.</p>
+        <div class="tag-row">
+          <span class="tag">Process Redesign</span><span class="tag">AI Implementation</span><span class="tag">Productivity Improvement</span>
+        </div>
+      </div>
+      <div class="matrix-card reveal">
+        <span class="matrix-num">03</span>
+        <h3 class="matrix-heading">Investment Compliance</h3>
+        <p class="matrix-desc">Managing pre- and post-trade compliance for multi-jurisdiction fund portfolios, building Bloomberg-based workflow automation, and preventing high-stakes trade errors.</p>
+        <div class="tag-row">
+          <span class="tag">Portfolio Compliance</span><span class="tag">Bloomberg AIM</span><span class="tag">EMEA Funds</span>
+        </div>
+      </div>
+      <div class="matrix-card reveal">
+        <span class="matrix-num">04</span>
+        <h3 class="matrix-heading">Product &amp; SaaS Systems</h3>
+        <p class="matrix-desc">Coordinating product roadmaps and sprint cycles for B2B SaaS platforms, translating business requirements into development priorities, and running structured UAT.</p>
+        <div class="tag-row">
+          <span class="tag">Roadmap Ownership</span><span class="tag">Sprint Planning</span><span class="tag">B2B SaaS</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="impact">
+    <div class="impact-quote reveal">
+      <blockquote>"Not everything that can be counted counts, and not everything that counts can be counted."</blockquote>
+      <cite>William Bruce Cameron</cite>
+    </div>
+    <div class="impact-grid">
+      <div class="impact-card reveal"><i class="ti ti-rocket"></i><span class="impact-num">$30M</span><p class="impact-label">TCV client onboarded, end-to-end program delivery</p></div>
+      <div class="impact-card reveal"><i class="ti ti-trending-up"></i><span class="impact-num">33%</span><p class="impact-label">Associate productivity increase via process redesign</p></div>
+      <div class="impact-card reveal"><i class="ti ti-shield-check"></i><span class="impact-num">50%</span><p class="impact-label">Reduction in client escalations, US healthcare operations</p></div>
+      <div class="impact-card reveal"><i class="ti ti-cash-banknote"></i><span class="impact-num">$80B+</span><p class="impact-label">AUM across 120+ global funds, compliance oversight</p></div>
+      <div class="impact-card reveal"><i class="ti ti-alert-triangle"></i><span class="impact-num">$15M</span><p class="impact-label">Trade error prevented through proactive intervention</p></div>
+      <div class="impact-card reveal"><i class="ti ti-building-bank"></i><span class="impact-num">10+</span><p class="impact-label">IPOs pre-cleared across global institutional funds</p></div>
+    </div>
+  </section>
+
+  <section id="journey">
+    <p class="section-lbl">Chronology</p>
+    <h2 class="section-title">Professional <em>Journey</em></h2>
+    <div class="timeline-wrapper">
+
+      <div class="timeline-node reveal">
+        <div class="node-header">
+          <h3 class="node-org">Annova Solutions</h3>
+          <span class="node-date">2025 – Present</span>
+        </div>
+        <p class="node-role">Program Manager</p>
+        
+        <div class="node-sub-group">
+          <p class="node-sub-title">Strategy &amp; Operations</p>
+          <div class="node-bullet">Increased associates' productivity by 33% by streamlining SOPs, restructuring KPIs, and implementing a cost-effective AI solution for a major client in the firm's portfolio.</div>
+          <div class="node-bullet">Reduced client escalations by 50% by introducing a quantitative risk assessment matrix for early risk detection and mitigation, utilizing RAID logs to document risks, enabling stable delivery and SLA adherence.</div>
+          <div class="node-bullet">Rebuilt processes for better ROI and sustained value realization using Six Sigma and Lean frameworks.</div>
+        </div>
+
+        <div class="node-sub-group">
+          <p class="node-sub-title">Product &amp; Project Management</p>
+          <div class="node-bullet">Facilitated product development for two B2B SaaS platforms by coordinating roadmaps, agile sprint planning, and UAT cycles across internal teams, ensuring timely deployment and delivery aligned with strategic goals.</div>
+          <div class="node-bullet">Established the project management office (PMO) aimed at improving leadership visibility on active projects.</div>
+        </div>
+
+        <div class="node-sub-group">
+          <p class="node-sub-title">Business Development</p>
+          <div class="node-bullet">Led vendor evaluation, shortlisting, and GTM/partnership analysis across the current health-tech solutions landscape.</div>
+        </div>
+      </div>
+
+      <div class="timeline-node reveal">
+        <div class="node-header">
+          <h3 class="node-org">Indian Institute of Management Kozhikode</h3>
+          <span class="node-date">2023 – 2025</span>
+        </div>
+        <p class="node-role">Master of Business Administration (MBA)</p>
+        <div class="node-bullet">Elected as a peer representative to oversee operational initiatives for the Climate Change &amp; Sustainability and Social Service student bodies.</div>
+        <div class="node-bullet">Completed strategic coursework focusing on Innovation and Digital Transformation at IE Business School, Madrid.</div>
+      </div>
+
+      <div class="timeline-node reveal">
+        <div class="node-header">
+          <h3 class="node-org">Landmark Group</h3>
+          <span class="node-date">2024 (Summer)</span>
+        </div>
+        <p class="node-role">Summer Intern, Retail Strategy &amp; Operations</p>
+        <p class="node-intro">An intensive two-month strategic stint aimed to improve in-store customer experience, store operations, and brand positioning.</p>
+        <div class="node-bullet">Developed a structured store ranking model using NPS data to map and accelerate in-store customer experiences.</div>
+        <div class="node-bullet">Analyzed 5 major market competitors to optimize for SKU availability, product assortment, and demand-aligned pricing matrix.</div>
+        <div class="node-bullet">Built an expansion framework for Tier-1 metros covering site selection analytics, infrastructure scaling, staffing, and ROI models.</div>
+      </div>
+
+      <div class="timeline-node reveal">
+        <div class="node-header">
+          <h3 class="node-org">Franklin Templeton Investments</h3>
+          <span class="node-date">2020 – 2023</span>
+        </div>
+        <p class="node-role">Compliance Business Analyst L2, Investment Compliance Division</p>
+        <div class="node-bullet">Detected and escalated a $15M erroneous trade sequence in real time, directly preventing substantial portfolio risk exposure and regulatory penalties.</div>
+        <div class="node-bullet">Monitored complex regulatory mandates across 120+ EMEA funds managing $80B+ in Assets Under Management (AUM).</div>
+        <div class="node-bullet">Facilitated governance clearance workflows for 10+ IPO setups and 5+ new market fund rollouts.</div>
+        <div class="node-bullet">Automated terminal script paths, reducing recurring analyst compliance workflow cycles by over 300 business hours.</div>
+        <div class="node-bullet">Built advanced ESG filter frameworks matching EU regulatory structures across a distribution list of 50+ flagship portfolios.</div>
+      </div>
+
+      <div class="timeline-node reveal">
+        <div class="node-header">
+          <h3 class="node-org">Bhavan's Vivekananda College / Osmania University</h3>
+          <span class="node-date">2017 – 2020</span>
+        </div>
+        <p class="node-role">Bachelor of Commerce (B.Com)</p>
+        <div class="node-bullet">Foundation in commerce, accounting, and financial principles, complemented by active involvement in campus culture.</div>
+        <div class="node-bullet">Headed Graphic Design and Newsletter departments for the college's cultural and commerce clubs.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="seek">
+    <p class="section-lbl">Opportunities</p>
+    <h2 class="section-title">What I <em>Seek</em></h2>
+    <p class="seek-intro reveal">
+      I'm exploring roles where I can combine analytical rigour with operational execution, building systems, leading cross-functional initiatives, and creating measurable impact from day one. Open to India-based roles now, with longer-term appetite for international markets.
+    </p>
+    <div class="seek-grid">
+      <div class="seek-card reveal"><i class="ti ti-building-skyscraper seek-icon"></i><h3 class="seek-title">Strategy &amp; Consulting</h3><p class="seek-desc">Corporate strategy, business transformation, or in-house consulting roles where structured thinking and cross-functional ownership are valued.</p></div>
+      <div class="seek-card reveal"><i class="ti ti-settings seek-icon"></i><h3 class="seek-title">Operations</h3><p class="seek-desc">Roles that sit at the centre of execution, running operations, designing processes, and building the infrastructure for scale.</p></div>
+      <div class="seek-card reveal"><i class="ti ti-layout-board seek-icon"></i><h3 class="seek-title">PMO &amp; Program Management</h3><p class="seek-desc">Owning delivery portfolios, governance structures, and complex multi-stakeholder programmes, ideally in tech, healthcare, or finance.</p></div>
+      <div class="seek-card reveal"><i class="ti ti-user-star seek-icon"></i><h3 class="seek-title">Chief of Staff</h3><p class="seek-desc">Supporting senior leadership with strategic priorities, operating cadence, and org-wide initiatives, ideally in a high-growth context.</p></div>
+      <div class="seek-card reveal"><i class="ti ti-device-laptop seek-icon"></i><h3 class="seek-title">Product Management</h3><p class="seek-desc">B2B SaaS or enterprise product roles where my experience coordinating roadmaps, sprint cycles, and UAT translates directly.</p></div>
+      <div class="seek-card reveal"><i class="ti ti-shield-check seek-icon"></i><h3 class="seek-title">Compliance &amp; Risk</h3><p class="seek-desc">Investment compliance, regulatory operations, or risk management roles in financial services, building on my FT foundation.</p></div>
+    </div>
+  </section>
+
+  <section id="competencies">
+    <p class="section-lbl">Value Proposition</p>
+    <h2 class="section-title"><em>Competencies</em></h2>
+    <div class="bring-layout">
+      <div>
+        <p class="bring-text reveal">
+          I'm a generalist with specialist depth, comfortable building from zero, navigating ambiguity, and delivering outcomes that show up in the numbers. My career has spanned global asset management, AI-native healthcare tech, and top-tier business education, which gives me a cross-domain lens that's hard to replicate.
+        </p>
+        <ul class="bring-list">
+          <li class="reveal"><span class="li-num">01</span><span class="li-text"><strong>Operational rigour with strategic framing.</strong> I don't just run the process, I understand why it exists and when it needs to change.</span></li>
+          <li class="reveal"><span class="li-num">02</span><span class="li-text"><strong>Comfort with ambiguity.</strong> The PMO I built started with a blank page. I've learned to structure chaos into seamless delivery.</span></li>
+          <li class="reveal"><span class="li-num">03</span><span class="li-text"><strong>Cross-functional credibility.</strong> I've worked alongside fund managers, traders, product teams and senior leaders(CXOs).</span></li>
+          <li class="reveal"><span class="li-num">04</span><span class="li-text"><strong>High-stakes accuracy.</strong> Managing compliance for $80B+ in assets trains a certain muscle: the cost of error is not abstract.</span></li>
+          <li class="reveal"><span class="li-num">05</span><span class="li-text"><strong>Global perspective.</strong> IIM-K, IE Business School Madrid, and a career spanning global financial markets gives me a wider lens.</span></li>
+	   <li class="reveal"><span class="li-num">06</span><span class="li-text"><strong>Leadership Decision Influence.</strong> Skilled at building consensus and influencing decision-making at the senior leadership level.</span></li>
+        </ul>
+      </div>
+      <div class="skills-block reveal">
+        <div class="skills-group">
+          <p class="skills-group-label">Management &amp; Frameworks</p>
+          <div class="skills-tags"><span class="skill-tag">PMO Setup</span><span class="skill-tag">Agile / Scrum</span><span class="skill-tag">Operational Excellence and Process Efficiency</span><span class="skill-tag">OKRs</span><span class="skill-tag">Change Management</span></div>
+        </div>
+       <div class="skills-group">
+  <p class="skills-group-label">Domain Knowledge</p>
+  <div class="skills-tags">
+    <span class="skill-tag">US Healthcare (Payer/Provider)</span>
+    <span class="skill-tag">Investment Compliance</span>
+    <span class="skill-tag">B2B SaaS</span>
+    <span class="skill-tag">Retail Strategy (Category Management)</span>
+  </div>
+</div>
+        <div class="skills-group">
+          <p class="skills-group-label">Tools &amp; Platforms</p>
+          <div class="skills-tags"><span class="skill-tag">MS Office Suite</span><span class="skill-tag">BPMN</span><span class="skill-tag">Trading Systems (Charles River)</span><span class="skill-tag">Bloomberg </span><span class="skill-tag">Project Management (Jira, Zoho)</span></div>
+        </div>
+        <div class="skills-group">
+          <p class="skills-group-label">MBA Coursework</p>
+          <div class="skills-tags">
+            <span class="skill-tag">Corporate Strategy</span>
+            <span class="skill-tag">Operations &amp; Supply Chain Management</span>
+            <span class="skill-tag">Digital Transformation</span>
+            <span class="skill-tag">Design Thinking &amp; Innovation</span>
+            <span class="skill-tag">Financial Management</span>
+            <span class="skill-tag">Marketing Management</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <p class="section-lbl">Academic Foundation</p>
+    <h2 class="section-title"><em>Education</em></h2>
+    <div class="edu-grid">
+      <div class="edu-card reveal">
+        <p class="edu-year">2023 – 2025</p>
+        <p class="edu-degree">Master of Business Administration (MBA)</p>
+        <p class="edu-inst">Indian Institute of Management Kozhikode</p>
+        <p class="edu-note">One of India's top IIMs. Elected to lead Social Service Group and Climate Change and Sustainability student bodies. Interned at Landmark Group.</p>
+      </div>
+      <div class="edu-card reveal">
+        <p class="edu-year">2025</p>
+        <p class="edu-degree">International Exposure &middot; Digital Transformation &amp; Innovation</p>
+        <p class="edu-inst">IE Business School, Madrid</p>
+        <p class="edu-note">Coursework on innovation strategy, digital business models, and transformation leadership. Ranked among the top institutions worldwide for business education.</p>
+      </div>
+      <div class="edu-card reveal">
+        <p class="edu-year">2017 – 2020</p>
+        <p class="edu-degree">Bachelor of Commerce (B.Com)</p>
+        <p class="edu-inst">Bhavan's Vivekananda College / Osmania University</p>
+        <p class="edu-note">Commerce and accounting foundation. Led Graphic Design and Newsletter student committees.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="moments-carousel">
+    <p class="carousel-label">Milestones &amp; Moments</p>
+    <div class="carousel-marquee">
+      <div class="marquee-track">
+        <img src="20250222_174835.jpg" alt="Milestone 1">
+        <img src="IMG-20250224-WA0003 (1).jpg" alt="Milestone 2">
+        <img src="IMG-20250403-WA0006.jpg" alt="Milestone 3">
+        <img src="20220316_205155.jpg" alt="Milestone 4">
+        <img src="IMG-20230908-WA0024 (1).jpg" alt="Milestone 5">
+        <img src="20250305_155643.jpg" alt="Milestone 6">
+        <img src="IMG-20250224-WA0019.jpg" alt="Milestone 8">
+        <img src="InShot_20250321_123559589.jpg" alt="Milestone 9">
+        <img src="20250302_114751.jpg" alt="Milestone 10">
+        <img src="20250404_150338.jpg" alt="Milestone 11">
+        <img src="20250226_090532.jpg" alt="Milestone 12">
+        <img src="PXL_20230617_062845686.jpg" alt="Milestone 13">
+        <img src="PXL_20230617_075342157~2.jpg" alt="Milestone 14">
+        <img src="20250223_183706.jpg" alt="Milestone 15">
+
+        <img src="20250222_174835.jpg" alt="Milestone 1 Repeat">
+        <img src="IMG-20250224-WA0003 (1).jpg" alt="Milestone 2 Repeat">
+        <img src="IMG-20250403-WA0006.jpg" alt="Milestone 3 Repeat">
+        <img src="20220316_205155.jpg" alt="Milestone 4 Repeat">
+        <img src="IMG-20230908-WA0024 (1).jpg" alt="Milestone 5 Repeat">
+        <img src="20250305_155643.jpg" alt="Milestone 6 Repeat">
+        <img src="IMG-20250224-WA0019.jpg" alt="Milestone 8 Repeat">
+        <img src="InShot_20250321_123559589.jpg" alt="Milestone 9 Repeat">
+        <img src="20250302_114751.jpg" alt="Milestone 10 Repeat">
+        <img src="20250404_150338.jpg" alt="Milestone 11 Repeat">
+        <img src="20250226_090532.jpg" alt="Milestone 12 Repeat">
+        <img src="PXL_20230617_062845686.jpg" alt="Milestone 13 Repeat">
+        <img src="PXL_20230617_075342157~2.jpg" alt="Milestone 14 Repeat">
+        <img src="20250223_183706.jpg" alt="Milestone 15 Repeat">
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <p class="section-lbl reveal">Get In Touch</p>
+    <h2 class="section-title reveal">Let's <em>Connect</em></h2>
+    <div class="contact-layout">
+      <div>
+        <p class="contact-intro reveal">
+          I'm actively exploring new roles and am happy to connect with hiring managers, founders, and operators building something meaningful. Whether it's a role, a conversation, or a referral, I'd love to hear from you.
+        </p>
+        <div class="contact-links reveal">
+          <a class="contact-link" href="mailto:d.sai.kalyan07@gmail.com"><i class="ti ti-mail"></i> d.sai.kalyan07@gmail.com</a>
+          <a class="contact-link" href="https://linkedin.com/in/saikalyandaddanala/" target="_blank"><i class="ti ti-brand-linkedin"></i> linkedin.com/in/saikalyandaddanala</a>
+          <a class="contact-link" href="Sai_Kalyan-Resume.pdf" target="_blank"><i class="ti ti-file-cv"></i> Download Resume (PDF)</a>
+        </div>
+      </div>
+      <div class="open-to-box reveal">
+        <p class="open-to-label">Currently Open To</p>
+        <div class="open-to-item"><i class="ti ti-building-skyscraper"></i>Strategy &amp; Corporate Development</div>
+        <div class="open-to-item"><i class="ti ti-settings"></i>Operations</div>
+        <div class="open-to-item"><i class="ti ti-layout-board"></i>Program / Project Management</div>
+        <div class="open-to-item"><i class="ti ti-user-star"></i>Chief of Staff</div>
+        <div class="open-to-item"><i class="ti ti-device-laptop"></i>Product Management (B2B / SaaS)</div>
+        <div class="open-to-item"><i class="ti ti-map-pin"></i>India and International</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Sai Kalyan Daddanala &copy; 2026 · Vibe Coded</span>
+  </footer>
+
+  <script>
+    // Smooth Intersection Scroll Animation Observer
+    const scrollObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add('visible');
+        });
+      },
+      { threshold: 0.1 }
+    );
+    document.querySelectorAll('.reveal').forEach(el => scrollObserver.observe(el));
+  </script>
+</body>
+</html>
